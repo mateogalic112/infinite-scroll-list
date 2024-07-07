@@ -14,9 +14,7 @@ const useInfiniteScroll = ({ lastElementRef }: Args) => {
   const observerCallback = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
-      if (entry.isIntersecting && hasNextPage) {
-        fetchNextPage();
-      }
+      if (entry.isIntersecting && hasNextPage) fetchNextPage();
     },
     [fetchNextPage, hasNextPage]
   );
