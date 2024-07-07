@@ -36,10 +36,8 @@ const fetchGithubUsers = async (cursor: number) => {
 };
 
 const useFetchGithubUsers = () => {
-  const queryKey = ["github-users"];
-
   return useInfiniteQuery({
-    queryKey,
+    queryKey: ["github-users"],
     queryFn: ({ pageParam }) => fetchGithubUsers(pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextPage,
