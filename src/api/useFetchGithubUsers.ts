@@ -15,8 +15,7 @@ const fetchGithubUsers = async (cursor: number) => {
   const response = await fetch(url, {
     headers: {
       "X-GitHub-Api-Version": "2022-11-28",
-      "Content-Type": "application/json",
-      Authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
     },
   });
 
@@ -24,19 +23,20 @@ const fetchGithubUsers = async (cursor: number) => {
     throw new Error("Failed to fetch users");
   }
 
-  const result = await response.json();
-  const users = result as GithubUser[];
+  const users = (await response.json()) as GithubUser[];
 
-  const hasNextPage = result.length === PER_PAGE;
+  const hasNextPage = users.length === PER_PAGE;
+  // Use last user id as next page cursor
+  const nextPage = hasNextPage ? users[users.length - 1].id : null;
 
   return {
     data: users,
-    nextPage: hasNextPage ? users[users.length - 1].id : null,
+    nextPage,
   };
 };
 
 const useFetchGithubUsers = () => {
-  const queryKey = ["users"];
+  const queryKey = ["github-users"];
 
   return useInfiniteQuery({
     queryKey,

@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { LoadingSpinner } from "@/icons/LoadingSpinner";
 import { Fragment, useRef } from "react";
 
 const InfiniteScrollList = () => {
@@ -14,11 +15,9 @@ const InfiniteScrollList = () => {
     lastElementRef,
   });
 
-  console.log({ users });
-
   return (
-    <div className="max-h-[300px] overflow-y-scroll">
-      <ul className="max-w-[400px]">
+    <div className="max-w-[400px] max-h-[360px] overflow-y-scroll pr-4">
+      <ul>
         {users.map((user) => (
           <Fragment key={user.id}>
             <li className="flex items-center gap-4 p-2 w-full">
@@ -43,8 +42,11 @@ const InfiniteScrollList = () => {
           </Fragment>
         ))}
       </ul>
-      <div ref={lastElementRef}>
-        {isFetchingNextPage && <p>Loading more...</p>}
+      <div
+        className="flex items-center justify-center p-4"
+        ref={lastElementRef}
+      >
+        {isFetchingNextPage && <LoadingSpinner />}
       </div>
     </div>
   );
