@@ -7,7 +7,7 @@ interface Args {
 
 const useInfiniteScroll = ({ lastElementRef }: Args) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useFetchGithubUsers(1);
+    useFetchGithubUsers();
 
   const observerElem = useRef<IntersectionObserver | null>(null);
 

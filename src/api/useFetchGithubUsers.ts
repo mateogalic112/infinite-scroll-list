@@ -35,8 +35,8 @@ const fetchGithubUsers = async (cursor: number) => {
   };
 };
 
-const useFetchGithubUsers = (cursor: number) => {
-  const queryKey = ["users", cursor];
+const useFetchGithubUsers = () => {
+  const queryKey = ["users"];
 
   return useInfiniteQuery({
     queryKey,
