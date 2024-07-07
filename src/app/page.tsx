@@ -1,15 +1,11 @@
-"use client";
-
-import useFetchGithubUsers from "@/api/useFetchGithubUsers";
-import { Button } from "@/components/ui/button";
+import InfiniteScrollList from "./components/infinite-scroll-list";
 
 export default function Home() {
-  const { data } = useFetchGithubUsers();
-  console.log({ data });
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-black">
-      <Button>Click me</Button>
+    <main className="flex min-h-screen flex-col p-12">
+      <h1 className="text-2xl mb-4 uppercase">Github users</h1>
+
+      <InfiniteScrollList />
     </main>
   );
 }
